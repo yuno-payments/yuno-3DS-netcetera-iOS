@@ -8,7 +8,6 @@ let package = Package(
     products: [
         .library(
             name: "Yuno3DSNetcetera",
-            type: .dynamic,
             targets: ["Yuno3DSNetceteraWrapper"]
         )
     ],
@@ -29,7 +28,7 @@ let package = Package(
         ),
         .binaryTarget(
             name: "Yuno3DSNetcetera",
-            url: "https://github.com/yuno-payments/yuno-3DS-netcetera-iOS/releases/download/1.0.0/Yuno3DSNetcetera.xcframework.zip",
+            url: "https://github.com/yuno-payments/yuno-3DS-netcetera-iOS/releases/download/1.0.1/Yuno3DSNetcetera.xcframework.zip",
             checksum: "5c22f4e3f31a08f6a380eb6b3a29bb6378ae4eaecf2ea25feb58e8d5a71a7cd1"
         ),
         .binaryTarget(
