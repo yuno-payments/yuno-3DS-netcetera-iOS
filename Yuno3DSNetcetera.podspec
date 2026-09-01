@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
   s.name             = 'Yuno3DSNetcetera'
-  s.version          = '2.17.0'
+  s.version          = '1.1.0'
   s.summary          = 'Netcetera 3DS SDK integration for YunoSDK.'
 
   s.description      = <<-DESC
