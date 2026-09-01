@@ -28,8 +28,8 @@ let package = Package(
         ),
         .binaryTarget(
             name: "Yuno3DSNetcetera",
-            url: "https://github.com/yuno-payments/yuno-3DS-netcetera-iOS/releases/download/2.17.0/Yuno3DSNetcetera.xcframework.zip",
-            checksum: "3aaecfa08e97b25bbaa4d87d8f766e408f1f3c77eba201d0c8886dfe8ca70607"
+            url: "https://github.com/yuno-payments/yuno-3DS-netcetera-iOS/releases/download/1.1.0/Yuno3DSNetcetera.xcframework.zip",
+            checksum: "9ae559e1e7d491b47cc66d82aeac85f9f6a3873e77f3be1ef18288d3da10f37b"
         ),
         .binaryTarget(
             name: "ThreeDS_SDK",

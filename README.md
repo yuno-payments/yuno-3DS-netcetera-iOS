@@ -15,7 +15,7 @@ If you are not enabling 3DS, you do not need this package.
 - **[YunoSDK](https://github.com/yuno-payments/yuno-sdk-ios) `2.17.0` or higher**
   installed in the same app target. Earlier versions of YunoSDK do not expose
   the `YunoThreeDSRegistry` hook that this package plugs into and will fail to
-  link.
+  link. 3DS in the enrollment flow requires YunoSDK `2.22.0` or higher.
 
 ## Installation
 
@@ -35,8 +35,8 @@ You also need `YunoSDK` itself, added as a separate Swift Package:
 https://github.com/yuno-payments/yuno-sdk-ios
 ```
 
-Make sure both packages resolve to a version **>= 2.17.0** so they stay
-ABI-compatible.
+`Yuno3DSNetcetera` resolves to **>= 1.1.0**, and `YunoSDK` to **>= 2.17.0**
+(**>= 2.22.0** for enrollment 3DS), so the two stay ABI-compatible.
 
 ### CocoaPods
 
@@ -47,7 +47,7 @@ target 'YourApp' do
   use_frameworks!
 
   pod 'YunoSDK',          '~> 2.17'
-  pod 'Yuno3DSNetcetera', '~> 2.17'
+  pod 'Yuno3DSNetcetera', '~> 1.1.0'
 end
 ```
 
