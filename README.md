@@ -4,18 +4,20 @@ Netcetera-powered 3-D Secure (3DS) provider for the [Yuno iOS SDK](https://githu
 
 This package ships an optional 3DS authentication layer built on top of
 [Netcetera's 3DS SDK](https://3dsdk.netcetera.com/). Install it alongside
-`YunoSDK` only when your integration needs to perform in-app 3DS challenges.
+`SdkPayments` only when your integration needs to perform in-app 3DS challenges.
 If you are not enabling 3DS, you do not need this package.
+
+> **Prerelease.** This branch ships the `3.0.0-alpha.2` prerelease, distributed under the module name `SdkPaymentsNetcetera`. It pairs with `SdkPayments` `3.0.0-alpha.2` and is not API-compatible with the legacy `Yuno3DSNetcetera` 1.x/2.x line.
 
 ## Requirements
 
 - **iOS 14+**
 - **Xcode 26.2+**
 - **Swift 5.7+**
-- **[YunoSDK](https://github.com/yuno-payments/yuno-sdk-ios) `2.17.0` or higher**
-  installed in the same app target. Earlier versions of YunoSDK do not expose
-  the `YunoThreeDSRegistry` hook that this package plugs into and will fail to
-  link. 3DS in the enrollment flow requires YunoSDK `2.22.0` or higher.
+- **[SdkPayments](https://github.com/yuno-payments/yuno-sdk-ios) `3.0.0-alpha.2`**
+  installed in the same app target. It exposes the `ThreeDSRegistry` hook that
+  this package plugs into. Pin both packages to the same alpha so they stay
+  ABI-compatible.
 
 ## Installation
 
@@ -27,16 +29,16 @@ In Xcode: **File → Add Package Dependencies…** and use the URL:
 https://github.com/yuno-payments/yuno-3DS-netcetera-iOS
 ```
 
-Select the `Yuno3DSNetcetera` library and add it to your app target.
+Select the `SdkPaymentsNetcetera` library and add it to your app target.
 
-You also need `YunoSDK` itself, added as a separate Swift Package:
+You also need `SdkPayments` itself, added as a separate Swift Package:
 
 ```
 https://github.com/yuno-payments/yuno-sdk-ios
 ```
 
-`Yuno3DSNetcetera` resolves to **>= 1.1.0**, and `YunoSDK` to **>= 2.17.0**
-(**>= 2.22.0** for enrollment 3DS), so the two stay ABI-compatible.
+Pin both packages to the same alpha: `SdkPaymentsNetcetera` `3.0.0-alpha.2`
+and `SdkPayments` `3.0.0-alpha.2`, so the two stay ABI-compatible.
 
 ### CocoaPods
 
@@ -46,8 +48,8 @@ platform :ios, '14.0'
 target 'YourApp' do
   use_frameworks!
 
-  pod 'YunoSDK',          '~> 2.17'
-  pod 'Yuno3DSNetcetera', '~> 1.1.0'
+  pod 'SdkPayments',          '3.0.0-alpha.2'
+  pod 'SdkPaymentsNetcetera', '3.0.0-alpha.2'
 end
 ```
 
@@ -61,14 +63,14 @@ pod install
 
 ### With Swift Package Manager
 
-The provider auto-registers with `YunoThreeDSRegistry` at framework load
+The provider auto-registers with `ThreeDSRegistry` at framework load
 time via an Objective-C `+load` bootstrap. No explicit setup is required:
 
 ```swift
-import YunoSDK
-import Yuno3DSNetcetera
+import SdkPayments
+import SdkPaymentsNetcetera
 
-// Initialize YunoSDK as usual — 3DS is already wired up.
+// Initialize SdkPayments as usual. 3DS is already wired up.
 Yuno.initialize(apiKey: "YOUR_API_KEY", config: YunoConfig())
 ```
 
@@ -79,13 +81,13 @@ auto-register bootstrap is not included. Register the provider manually
 **once**, before any payment or enrollment flow:
 
 ```swift
-import YunoSDK
-import Yuno3DSNetcetera
+import SdkPayments
+import SdkPaymentsNetcetera
 
 @main
 struct YourApp: App {
     init() {
-        Yuno3DSNetcetera.register()
+        SdkPaymentsNetcetera.register()
         Yuno.initialize(apiKey: "YOUR_API_KEY", config: YunoConfig())
     }
 
@@ -93,13 +95,13 @@ struct YourApp: App {
 }
 ```
 
-Once registered, the YunoSDK will route any 3DS challenges through the
+Once registered, SdkPayments will route any 3DS challenges through the
 Netcetera provider automatically — no further changes to your payment or
 enrollment code are needed.
 
 ## Sandbox / staging certificates
 
-When testing against the YunoSDK sandbox environment, the Netcetera 3DS
+When testing against the SdkPayments sandbox environment, the Netcetera 3DS
 SDK requires a Visa test root certificate
 (`acq-root-certeq-prev-environment.crt`) to be present in your app's
 main bundle.
@@ -124,11 +126,11 @@ used and can be omitted from Release builds.
 
 ## Troubleshooting
 
-**Linker error referencing `YunoThreeDSRegistry`**: your `YunoSDK`
-version is older than `2.17.0`. Bump it.
+**Linker error referencing `ThreeDSRegistry`**: your `SdkPayments`
+version does not match this package. Pin both to `3.0.0-alpha.2`.
 
 **3DS challenge UI never appears (CocoaPods)**: confirm you are calling
-`Yuno3DSNetcetera.register()` before `Yuno.initialize(...)`. SPM users
+`SdkPaymentsNetcetera.register()` before `Yuno.initialize(...)`. SPM users
 do not need this call.
 
 **`acq-root-certeq-prev-environment.crt not found` in console**: only
@@ -137,6 +139,6 @@ as described above. Safe to ignore in production builds.
 
 ## License
 
-MIT — see headers in [Yuno3DSNetcetera.podspec](Yuno3DSNetcetera.podspec).
+MIT, see headers in [SdkPaymentsNetcetera.podspec](SdkPaymentsNetcetera.podspec).
 The bundled `ThreeDS_SDK.xcframework` is property of Netcetera AG and
 subject to its own commercial license terms.

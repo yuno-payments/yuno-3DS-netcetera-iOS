@@ -3,33 +3,33 @@
 import PackageDescription
 
 let package = Package(
-    name: "Yuno3DSNetcetera",
+    name: "SdkPaymentsNetcetera",
     platforms: [.iOS(.v14)],
     products: [
         .library(
-            name: "Yuno3DSNetcetera",
-            targets: ["Yuno3DSNetceteraWrapper"]
+            name: "SdkPaymentsNetcetera",
+            targets: ["SdkPaymentsNetceteraWrapper"]
         )
     ],
     targets: [
         // Wrapper target. Holds the binaries together so a single library
-        // product can pull both Yuno3DSNetcetera and ThreeDS_SDK into the
+        // product can pull both SdkPaymentsNetcetera and ThreeDS_SDK into the
         // merchant's link line. Also a place to attach linkerSettings if
         // ThreeDS_SDK ends up requiring system frameworks. Same pattern as
         // FirebaseAnalyticsWrapper.
         .target(
-            name: "Yuno3DSNetceteraWrapper",
+            name: "SdkPaymentsNetceteraWrapper",
             dependencies: [
-                "Yuno3DSNetcetera",
+                "SdkPaymentsNetcetera",
                 "ThreeDS_SDK"
             ],
-            path: "Yuno3DSNetceteraWrapper",
+            path: "SdkPaymentsNetceteraWrapper",
             publicHeadersPath: "include"
         ),
         .binaryTarget(
-            name: "Yuno3DSNetcetera",
-            url: "https://github.com/yuno-payments/yuno-3DS-netcetera-iOS/releases/download/1.1.0/Yuno3DSNetcetera.xcframework.zip",
-            checksum: "9ae559e1e7d491b47cc66d82aeac85f9f6a3873e77f3be1ef18288d3da10f37b"
+            name: "SdkPaymentsNetcetera",
+            url: "https://github.com/yuno-payments/yuno-3DS-netcetera-iOS/releases/download/3.0.0-alpha.2/SdkPaymentsNetcetera.xcframework.zip",
+            checksum: "4d702b0246a004a78d86a8be4fc655246a4636397d0f9680301bac27fbff151f"
         ),
         .binaryTarget(
             name: "ThreeDS_SDK",

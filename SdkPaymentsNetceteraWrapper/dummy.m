@@ -1,6 +1,6 @@
 //
 //  dummy.m
-//  Yuno3DSNetceteraWrapper
+//  SdkPaymentsNetceteraWrapper
 //
 
 #import "dummy.h"
@@ -10,4 +10,4 @@
 
 // Swift Package Manager needs at least one source file in a target.
 // This wrapper exists to attach linkerSettings and additional dependencies
-// to the Yuno3DSNetcetera binary target (which cannot declare them itself).
+// to the SdkPaymentsNetcetera binary target (which cannot declare them itself).

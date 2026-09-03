@@ -1,12 +1,12 @@
 Pod::Spec.new do |s|
-  s.name             = 'Yuno3DSNetcetera'
-  s.version          = '1.1.0'
-  s.summary          = 'Netcetera 3DS SDK integration for YunoSDK.'
+  s.name             = 'SdkPaymentsNetcetera'
+  s.version          = '3.0.0-alpha.2'
+  s.summary          = 'Netcetera 3DS SDK integration for SdkPayments.'
 
   s.description      = <<-DESC
 
-  Optional 3DS SDK extension for YunoSDK based on Netcetera's
-  ThreeDS_SDK. Add this pod alongside YunoSDK only when you need
+  Optional 3DS SDK extension for SdkPayments based on Netcetera's
+  ThreeDS_SDK. Add this pod alongside SdkPayments only when you need
   to perform 3-D Secure authentication challenges in-app.
 
                        DESC
@@ -47,7 +47,7 @@ Pod::Spec.new do |s|
 
   s.requires_arc          = true
 
-  s.vendored_frameworks = 'Yuno3DSNetcetera.xcframework', 'ThreeDS_SDK.xcframework'
+  s.vendored_frameworks = 'SdkPaymentsNetcetera.xcframework', 'ThreeDS_SDK.xcframework'
 
   s.frameworks = 'UIKit', 'Combine'
   s.pod_target_xcconfig = { 'BUILD_LIBRARY_FOR_DISTRIBUTION' => 'YES' }
